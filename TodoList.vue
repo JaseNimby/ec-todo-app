@@ -1,27 +1,32 @@
 <template>
   <div class="wrapper">
-    <p>Du har {{ left }} saker kvar att göra</p>
+    <p>Du har {{ todosToBeDone }} saker kvar att göra</p>
     <div>
       <ul class="toDoList">
-        <TodoItem />
+        <TodoItem
+          v-for="todo in todos"
+          v-bind:key="todo.id"
+          v-bind:todoData="todo"
+          v-on:check="checkTable(todo)"
+        />
       </ul>
     </div>
-    <input v-model="thing" placeholder="Vad behöver du få gjort?" />
-    <button v-on:click="addToDo(thing)">Lägg till i listan</button>
+    <input v-model="newContent" placeholder="Vad behöver du få gjort?" />
+    <button v-on:click="addTodo(newContent)">Lägg till i listan</button>
   </div>
 </template>
 
 
 
 <script>
-import TodItem from "./TodoItem";
+import TodoItem from "./TodoItem";
 export default {
   components: { TodoItem },
   data() {
     return {
       newContent: "",
       todos: [],
-      left: 0,
+      todosToBeDone: 0,
     };
   },
 
