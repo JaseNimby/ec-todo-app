@@ -2,6 +2,7 @@
   <li class="todo-item">
     <input type="checkbox" v-model="checked" v-on:input="chekTodo" />
     <p>{{ todoData.content }}</p>
+    <button>X</button>
   </li>
 </template>
 

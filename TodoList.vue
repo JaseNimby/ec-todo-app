@@ -1,59 +1,48 @@
 <template>
   <div class="wrapper">
-    <p>Du har {{ todosToBeDone }} saker kvar att göra</p>
+    <p>Du har {{ left }} saker kvar att göra</p>
     <div>
-      <ul class="toDoList">
-        <TodoItem
-          v-for="todo in todos"
-          v-bind:key="todo.id"
-          v-bind:todoData="todo"
-          v-on:check="checkTable(todo)"
-        />
-      </ul>
+      <ul class="toDoList"></ul>
     </div>
     <input v-model="newContent" placeholder="Vad behöver du få gjort?" />
-    <button v-on:click="addTodo(newContent)">Lägg till i listan</button>
+    <button
+      v-for="todo in todos"
+      v-bind:key="todo.id"
+      v-bind:todoData="todo"
+      v-on:check="checkTodo(todo)"
+    >
+      Lägg till i listan
+    </button>
   </div>
 </template>
 
 
 
 <script>
-import TodoItem from "./TodoItem";
+import TodoItem from "/.TodoItem";
+
 export default {
   components: { TodoItem },
   data() {
     return {
       newContent: "",
       todos: [],
-      todosToBeDone: 0,
+      left: "",
     };
   },
 
   methods: {
-    addTodo() {
+    addToDo() {
       const newTodo = {
         id: Date.now(),
         content: this.newContent,
         done: false,
-        visible: true,
       };
       this.todos.push(newTodo);
-      this.newContent = "";
-      this.todosToBeDone += 1;
-    },
-
-    removeTodo(theTodo) {
-      this.todos = this.todos.filter((todo) => todo.id != theTodo.id);
     },
 
     checkTodo(theTodo) {
-      theTodo.done = !theTodo.done;
-      if (theTodo.done) {
-        this.todosToBeDone -= 1;
-      } else {
-        this.todosToBeDone += 1;
-      }
+      tehTodo.done = !theTodo.done;
     },
   },
 };
