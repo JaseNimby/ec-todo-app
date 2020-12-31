@@ -1,8 +1,8 @@
 <template>
   <li class="todo-item">
-    <input type="checkbox" v-model="checked" v-on:input="chekTodo" />
+    <input type="checkbox" v-on:input="checkTodo" />
     <p>{{ todoData.content }}</p>
-    <button>X</button>
+    <button v-on:click="removeTodo">X</button>
   </li>
 </template>
 
@@ -25,4 +25,17 @@ export default {
 </script>
 
 <style scoped>
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightgray;
+}
+.todo-item > p {
+  width: 100%;
+}
+.todo-item > * {
+  padding: 0.25rem;
+  margin: 0.25rem;
+}
 </style>

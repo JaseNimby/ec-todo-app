@@ -5,14 +5,15 @@
       <ul class="toDoList"></ul>
     </div>
     <input v-model="newContent" placeholder="Vad behöver du få gjort?" />
-    <button
+    <ToDoItem
       v-for="todo in todos"
       v-bind:key="todo.id"
       v-bind:todoData="todo"
       v-on:check="checkTodo(todo)"
+      v-on:remove="removeTodo(todo)"
     >
       Lägg till i listan
-    </button>
+    </ToDoItem>
   </div>
 </template>
 
@@ -42,6 +43,10 @@ export default {
     },
 
     checkTodo(theTodo) {
+      theTodo.done = this.todo.filter((todo) => todo.id != theTodo.id);
+    },
+
+    removeTodo(tehTodo) {
       tehTodo.done = !theTodo.done;
     },
   },
