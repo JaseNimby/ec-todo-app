@@ -28,8 +28,12 @@ export default {
     return {
       newContent: "",
       todos: [],
-      left: "",
     };
+  },
+  computed: {
+    left() {
+      return this.todos.filter((todo) => tdod.done == false).length;
+    },
   },
 
   methods: {
@@ -40,14 +44,15 @@ export default {
         done: false,
       };
       this.todos.push(newTodo);
+      this.newContent = "";
     },
 
     checkTodo(theTodo) {
-      theTodo.done = this.todo.filter((todo) => todo.id != theTodo.id);
+      theTodo.done = !theTodo.done;
     },
 
-    removeTodo(tehTodo) {
-      tehTodo.done = !theTodo.done;
+    removeTodo(theTodo) {
+      theTodo.done = this.todo.filter((todo) => todo.id != theTodo.id);
     },
   },
 };
